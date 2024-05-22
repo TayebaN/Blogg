@@ -1,0 +1,227 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #8758ff;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+}
+
+header {
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #8758ff;
+}
+h1,
+h2 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 50px;
+}
+
+header h2 {
+  margin-bottom: 10px;
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+}
+
+header a {
+  text-decoration: none;
+  color: #fff;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+header a:hover {
+  background-color: #6f3ecf;
+}
+
+.playPage,
+.AboutPage {
+  font-size: 50px;
+  font-weight: bold;
+  color: rgb(166, 255, 0);
+  text-align: center;
+  font-family: "Fredoka One", cursive;
+}
+
+.App,
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 80px;
+}
+
+.PostWrapper {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.PostWrapper h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.Post {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.Post h2 {
+  margin: 0 0 10px 0;
+  color: #007bff;
+}
+
+.Post p {
+  margin: 0 0 10px 0;
+  color: #555;
+}
+
+.Post button,
+.Comment button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.Post button:hover,
+.Comment button:hover {
+  color: #ff6600; /* Uppdatera hover-färg för bättre läsbarhet */
+}
+
+.comments {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.Comment {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.Comment p {
+  margin: 0 0 10px 0;
+  color: #555;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.fa-trash {
+  margin-left: 0.75rem;
+}
+
+.completed {
+  color: #c5aeff;
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+}
+
+.routes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.route-link {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  background-color: #8758ff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.route-link:hover {
+  background-color: #6f3ecf;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
