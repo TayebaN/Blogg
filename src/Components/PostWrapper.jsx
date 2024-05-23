@@ -25,32 +25,10 @@ export const PostWrapper = () => {
       ? posts
       : posts.filter((post) => post.category === selectedCategory);
 
-  //   return (
-  //     <div className="PostWrapper">
-  //       <h1>Welcome to My Blog!</h1>
-  //       <PostForm addPost={addPost} />
-  //       {posts.map((post) =>
-  //         post.isEditing ? (
-  //           <EditPostForm editPost={editContent} post={post} key={post.id} />
-  //         ) : (
-  //           <Post
-  //             post={post}
-  //             key={post.id}
-  //             deletePost={deletePost}
-  //             editPost={editPost}
-  //             addComment={addComment}
-  //             deleteComment={deleteComment}
-  //             editComment={editComment}
-  //             editCommentContent={editCommentContent}
-  //           />
-  //         )
-  //       )}
-  //     </div>
-  //   );
-  // };
   return (
     <div className="PostWrapper">
       <h1>Welcome to My Blog!</h1>
+
       <PostForm addPost={addPost} />
       <select
         onChange={(e) => filterByCategory(e.target.value)}

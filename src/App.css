@@ -26,15 +26,6 @@ header {
   z-index: 1000;
   background-color: #8758ff;
 }
-h1,
-h2 {
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-h1 {
-  font-size: 1.75rem;
-}
 
 h2 {
   font-size: 2rem;
@@ -224,4 +215,23 @@ button {
   color: #fff;
   border: none;
   cursor: pointer;
+}
+.user-controls {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+}
+.user-controls button {
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
 }
