@@ -5,7 +5,6 @@ import PostWrapper from "../Components/PostWrapper";
 const LandingPage = () => {
   return (
     <div>
-      <UserControls />
       <PostWrapper />
     </div>
   );

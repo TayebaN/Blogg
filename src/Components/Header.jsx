@@ -5,16 +5,34 @@ import { UserContext } from "../contexts/UserContext";
 import "../App.css";
 
 const Header = () => {
-  const { user } = useContext(UserContext);
+  const { user, logOut } = useContext(UserContext);
   return (
     <header>
       <h2>Tayeba's Blog</h2>
-      <div>
+      <nav>
+        {/* {user ? (
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/play">Play</Link>
+            <Link to="/about">About</Link>
+            <p>Logged in as {user.username}</p>
+            <button onClick={logOut}>Log Out</button>
+          </>
+        ) : (
+          <Link to="/login"></Link>
+        )} */}
         <Link to="/">Home</Link>
-        <Link to="/Play">Play</Link>
+        <Link to="/play">Play</Link>
         <Link to="/about">About</Link>
-      </div>
-      {user ? <p>Logged in as {user.username}</p> : <p>Please log in</p>}
+        {user ? (
+          <>
+            <span>Welcome, {user}!</span>
+            <button onClick={logOut}>Log Out</button>
+          </>
+        ) : (
+          <Link to="/login">Log In</Link>
+        )}
+      </nav>
     </header>
   );
 };
