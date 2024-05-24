@@ -11,7 +11,7 @@ const categories = ["Technology", "Health", "Science", "Education", "Sports"];
 const initialPosts = [
   {
     id: generateId(),
-    title: "The Future of AI",
+    title: "The Future of IT",
     content: "Artificial Intelligence (AI) is growing at a rapid pace...",
     category: "Technology",
     author: "Jane Doe",
