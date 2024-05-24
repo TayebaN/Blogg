@@ -19,7 +19,10 @@ const Header = () => {
             <button onClick={logOut}>Log Out</button>
           </>
         ) : (
-          <Link to="/login">Log In</Link>
+          <>
+            <Link to="/login">Log In</Link>
+            <Link to="/register">Register</Link>
+          </>
         )}
       </nav>
     </header>

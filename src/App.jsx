@@ -10,6 +10,7 @@ import PlayPage from "./Pages/Play";
 import AboutPage from "./Pages/About";
 import LoginForm from "./Components/LoginForm";
 import Header from "./Components/Header";
+import Register from "./Components/Register";
 import { PostProvider } from "./Components/PostContext";
 import { UserProvider, UserContext } from "./contexts/UserContext";
 import "./App.css";
@@ -28,6 +29,7 @@ const App = () => {
             <Header />
             <div className="content">
               <Routes>
+                <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route
                   path="/"
