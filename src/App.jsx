@@ -10,7 +10,6 @@ import PlayPage from "./Pages/Play";
 import AboutPage from "./Pages/About";
 import LoginForm from "./Components/LoginForm";
 import Header from "./Components/Header";
-//import ProtectedRoute from "./Components/ProtectedRoute";
 import { PostProvider } from "./Components/PostContext";
 import { UserProvider, UserContext } from "./contexts/UserContext";
 import "./App.css";

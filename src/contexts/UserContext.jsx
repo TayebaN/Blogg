@@ -3,28 +3,20 @@ import React, { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("username");
-    if (loggedInUser) {
-      setUser(loggedInUser);
-    }
-  }, []);
+  const [user, setUser] = useState(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    return loggedInUser ? loggedInUser : null;
+  });
 
   const logIn = (username) => {
     setUser(username);
-    localStorage.setItem("username", username);
+    localStorage.setItem("loggedInUser", username);
   };
 
   const logOut = () => {
     setUser(null);
-    localStorage.removeItem("username");
+    localStorage.removeItem("loggedInUser");
   };
-
-  //   const isLoggedIn = () => {
-  //     return !!user;
-  //   };
 
   return (
     <UserContext.Provider value={{ user, logIn, logOut }}>

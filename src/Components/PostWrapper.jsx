@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PostForm from "./PostForm";
 import { Post } from "./post";
 import EditPostForm from "./EditPostForms";
 import { PostContext } from "./PostContext";
+import { UserContext } from "../contexts/UserContext";
 
 export const PostWrapper = () => {
   const {
@@ -20,10 +21,14 @@ export const PostWrapper = () => {
     categories,
   } = useContext(PostContext);
 
-  const filteredPosts =
-    selectedCategory === "All"
-      ? posts
-      : posts.filter((post) => post.category === selectedCategory);
+  const { user } = useContext(UserContext);
+  const [showUserPosts, setShowUserPosts] = useState(false);
+
+  const filteredPosts = showUserPosts
+    ? posts.filter((post) => post.author === user)
+    : selectedCategory === "All"
+    ? posts
+    : posts.filter((post) => post.category === selectedCategory);
 
   return (
     <div className="PostWrapper">
@@ -40,6 +45,11 @@ export const PostWrapper = () => {
           </option>
         ))}
       </select>
+
+      <button onClick={() => setShowUserPosts(!showUserPosts)}>
+        {showUserPosts ? "Show All Posts" : "Show My Posts"}
+      </button>
+
       {filteredPosts.map((post) =>
         post.isEditing ? (
           <EditPostForm editPost={editContent} post={post} key={post.id} />

@@ -10,17 +10,6 @@ const Header = () => {
     <header>
       <h2>Tayeba's Blog</h2>
       <nav>
-        {/* {user ? (
-          <>
-            <Link to="/">Home</Link>
-            <Link to="/play">Play</Link>
-            <Link to="/about">About</Link>
-            <p>Logged in as {user.username}</p>
-            <button onClick={logOut}>Log Out</button>
-          </>
-        ) : (
-          <Link to="/login"></Link>
-        )} */}
         <Link to="/">Home</Link>
         <Link to="/play">Play</Link>
         <Link to="/about">About</Link>

@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { UserContext } from "..//contexts/UserContext";
 
 export const PostContext = createContext();
 
@@ -7,12 +8,43 @@ const generateId = () => uuidv4();
 
 const categories = ["Technology", "Health", "Science", "Education", "Sports"];
 
+const initialPosts = [
+  {
+    id: generateId(),
+    title: "The Future of AI",
+    content: "Artificial Intelligence (AI) is growing at a rapid pace...",
+    category: "Technology",
+    author: "Jane Doe",
+    comments: [],
+    isEditing: false,
+  },
+  {
+    id: generateId(),
+    title: "Healthy Living Tips",
+    content: "Maintaining a healthy lifestyle involves...",
+    category: "Health",
+    author: "Jane Doe",
+    comments: [],
+    isEditing: false,
+  },
+  {
+    id: generateId(),
+    title: "Discovering the Universe",
+    content: "Space exploration has always been a fascinating subject...",
+    category: "Science",
+    author: "Jane Doe",
+    comments: [],
+    isEditing: false,
+  },
+];
+
 export const PostProvider = ({ children }) => {
   const [posts, setPosts] = useState(
-    JSON.parse(localStorage.getItem("posts")) || []
+    JSON.parse(localStorage.getItem("posts")) || initialPosts
   );
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     if (posts) {
@@ -28,6 +60,7 @@ export const PostProvider = ({ children }) => {
         title: post.title,
         content: post.content,
         category: post.category,
+        author: user,
         comments: [],
         isEditing: false,
       },
@@ -62,7 +95,13 @@ export const PostProvider = ({ children }) => {
               ...post,
               comments: [
                 ...post.comments,
-                { id: generateId(), text: comment, isEditing: false },
+                {
+                  id: generateId(),
+                  text: comment,
+                  author: user,
+                  username: user,
+                  isEditing: false,
+                },
               ],
             }
           : post

@@ -1,102 +1,109 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { PostContext } from "./PostContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../contexts/UserContext";
 
-export const Post = ({ post }) => {
-  const {
-    deletePost,
-    editPost,
-    addComment,
-    deleteComment,
-    editComment,
-    editCommentContent,
-  } = useContext(PostContext);
-  const [comment, setComment] = useState("");
+export const Post = ({
+  post,
+  deletePost,
+  addComment,
+  deleteComment,
+  editComment,
+  editCommentContent,
+}) => {
+  const { user } = useContext(UserContext);
+  const { editPost } = useContext(PostContext);
+
+  const handleDelete = () => {
+    deletePost(post.id);
+  };
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    if (comment.trim()) {
-      addComment(post.id, comment);
-      setComment("");
+    const commentText = e.target.elements.comment.value;
+    if (commentText) {
+      addComment(post.id, `${user}: ${commentText}`);
+      e.target.elements.comment.value = "";
     }
   };
 
-  return (
-    <div className="Post">
-      <h2>{post.title}</h2>
-      <p>{post.content}</p>
-      <button onClick={() => editPost(post.id)}>
-        <FontAwesomeIcon icon={faEdit} />
-      </button>
-      <button onClick={() => deletePost(post.id)}>
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
+  const handleDeleteComment = (commentId) => {
+    deleteComment(post.id, commentId);
+  };
 
-      <form onSubmit={handleAddComment}>
-        <input
-          type="text"
-          placeholder="Leave a comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button type="submit">Add Comment</button>
-      </form>
+  const handleEditComment = (commentId) => {
+    editComment(post.id, commentId);
+  };
 
-      <div className="comments">
-        {post.comments.map((comment) =>
-          comment.isEditing ? (
-            <EditCommentForm
-              key={comment.id}
-              postId={post.id}
-              comment={comment}
-              editCommentContent={editCommentContent}
-            />
-          ) : (
-            <Comment
-              key={comment.id}
-              postId={post.id}
-              comment={comment}
-              deleteComment={deleteComment}
-              editComment={editComment}
-            />
-          )
-        )}
-      </div>
-    </div>
-  );
-};
-
-const Comment = ({ postId, comment, deleteComment, editComment }) => {
-  return (
-    <div className="Comment">
-      <p>{comment.text}</p>
-      <button onClick={() => editComment(postId, comment.id)}>
-        <FontAwesomeIcon icon={faEdit} />
-      </button>
-      <button onClick={() => deleteComment(postId, comment.id)}>
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
-    </div>
-  );
-};
-
-const EditCommentForm = ({ postId, comment, editCommentContent }) => {
-  const [text, setText] = useState(comment.text);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    editCommentContent(postId, comment.id, text);
+  const handleEditCommentContent = (commentId, text) => {
+    editCommentContent(post.id, commentId, text);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button type="submit">Save</button>
-    </form>
+    <div className="post">
+      <h2>{post.title}</h2>
+      <p>{post.content}</p>
+      <p>
+        <strong>Category:</strong> {post.category}
+      </p>
+      <p>
+        <strong>Author:</strong> {post.author}
+      </p>
+
+      {user === post.author && (
+        <div className="post-controls">
+          <button onClick={() => editPost(post.id)}>
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+          <button onClick={handleDelete}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
+      )}
+
+      <div className="comments">
+        <h3>Comments:</h3>
+        {post.comments.map((comment) => (
+          <div key={comment.id}>
+            <p>{comment.text}</p>
+            {(user === post.author || user === comment.author) && (
+              <div>
+                <button onClick={() => handleEditComment(comment.id)}>
+                  <FontAwesomeIcon icon={faEdit} />{" "}
+                  {comment.isEditing ? "Cancel" : ""}
+                </button>
+                <button onClick={() => handleDeleteComment(comment.id)}>
+                  <FontAwesomeIcon icon={faTrash} />{" "}
+                </button>
+                {comment.isEditing && (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleEditCommentContent(
+                        comment.id,
+                        e.target.elements.text.value
+                      );
+                    }}
+                  >
+                    <input
+                      type="text"
+                      name="text"
+                      defaultValue={comment.text}
+                    />
+                    <button type="submit">Save</button>
+                  </form>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <form onSubmit={handleAddComment}>
+        <input type="text" name="comment" placeholder="Add a comment" />
+        <button type="submit">Comment</button>
+      </form>
+    </div>
   );
 };

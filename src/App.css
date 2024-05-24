@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 * {
-  font-family: "Fredoka One", cursive;
+  font-family: "poppins";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,7 +12,7 @@ body {
   background: #8758ff;
   justify-content: center;
   align-items: center;
-  padding-top: 120px;
+  padding-top: 150px;
 }
 
 header {
@@ -121,7 +121,7 @@ header a:hover {
 
 .Post button:hover,
 .Comment button:hover {
-  color: #ff6600; /* Uppdatera hover-färg för bättre läsbarhet */
+  color: #ff6600;
 }
 
 .comments {
@@ -217,11 +217,9 @@ select {
 
 button {
   padding: 10px;
-  margin: 0 10px 0 10px;
   font-size: 16px;
   background-color: #007bff;
   color: #6d6363;
-  border: none;
   cursor: pointer;
 }
 .user-controls {
@@ -240,4 +238,47 @@ button {
   border-radius: 4px;
   margin-bottom: 10px;
   transition: background-color 0.3s ease;
+}
+
+.post {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 8px;
+}
+
+.post-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.comments {
+  margin-top: 1em;
+  padding: 10px;
+}
+
+.comments form {
+  margin-top: 1em;
+}
+
+.comments button {
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input,
+textarea,
+select {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
