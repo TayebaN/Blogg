@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,47 +8,46 @@ import {
 import LandingPage from "./Pages/LandingPage";
 import PlayPage from "./Pages/Play";
 import AboutPage from "./Pages/About";
-import LoginForm from "./Components/LoginForm";
+import { AuthProvider } from "./contexts/AuthContext";
+import LoginComponent from "./Components/LoginComponent";
 import Header from "./Components/Header";
-import Register from "./Components/Register";
+import RegisterComponent from "./Components/RegisterComponent";
 import { PostProvider } from "./Components/PostContext";
-import { UserProvider, UserContext } from "./contexts/UserContext";
+import { UserProvider } from "./contexts/UserContext";
+import PrivateRoute from "./Components/ProtectedRoute";
 import "./App.css";
-
-const PrivateRoute = ({ element }) => {
-  const { user } = useContext(UserContext);
-  return user ? element : <Navigate to="/login" />;
-};
 
 const App = () => {
   return (
-    <UserProvider>
-      <PostProvider>
-        <Router>
-          <div className="App">
-            <Header />
-            <div className="content">
-              <Routes>
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<LoginForm />} />
-                <Route
-                  path="/"
-                  element={<PrivateRoute element={<LandingPage />} />}
-                />
-                <Route
-                  path="/play"
-                  element={<PrivateRoute element={<PlayPage />} />}
-                />
-                <Route
-                  path="/about"
-                  element={<PrivateRoute element={<AboutPage />} />}
-                />
-              </Routes>
+    <AuthProvider>
+      <UserProvider>
+        <PostProvider>
+          <Router>
+            <div className="App">
+              <Header />
+              <div className="content">
+                <Routes>
+                  <Route path="/register" element={<RegisterComponent />} />
+                  <Route path="/login" element={<LoginComponent />} />
+                  <Route
+                    path="/"
+                    element={<PrivateRoute element={<LandingPage />} />}
+                  />
+                  <Route
+                    path="/play"
+                    element={<PrivateRoute element={<PlayPage />} />}
+                  />
+                  <Route
+                    path="/about"
+                    element={<PrivateRoute element={<AboutPage />} />}
+                  />
+                </Routes>
+              </div>
             </div>
-          </div>
-        </Router>
-      </PostProvider>
-    </UserProvider>
+          </Router>
+        </PostProvider>
+      </UserProvider>
+    </AuthProvider>
   );
 };
 

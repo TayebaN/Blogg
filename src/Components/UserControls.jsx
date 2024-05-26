@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import LoginForm from "./LoginForm";
+import LoginComponent from "./LoginComponent";
 import LogoutButton from "./LogoutButton";
 
 const UserControls = () => {
@@ -10,10 +10,11 @@ const UserControls = () => {
     <div className="user-controls">
       {user ? (
         <>
+          <p>Logged in as: {user.email}</p>
           <LogoutButton />
         </>
       ) : (
-        <LoginForm />
+        <LoginComponent />
       )}
     </div>
   );
